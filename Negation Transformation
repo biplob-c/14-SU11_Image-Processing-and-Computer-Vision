@@ -1,0 +1,28 @@
+#Use Google Colab notebook
+from google.colab.patches import cv2_imshow
+import numpy as np
+import cv2
+#import math
+
+#Uploading lena.jpg directly to the Colab session (Temporary)
+from google.colab import files
+print("Please select 'lena.jpg' to upload:")
+files.upload()
+
+img = cv2.imread('lena.jpg', cv2.IMREAD_GRAYSCALE)
+cv2_imshow(img)
+
+print(img.max())
+print(img.min())
+
+print(img.shape)
+
+for i in range(img.shape[0]):     #Rows
+    for j in range(img.shape[1]): #Columns
+        a = img.item(i,j)         # Retrieves the pixel value at position (i, j), for grayscale image 0-255
+        img[i,j] = 255-a          # Negation transformation, Sets the pixel at position (i, j) to a new value: 255 - a.
+
+cv2_imshow(img)                   #Displays the inverted image after the transformation is complete.
+
+cv2.waitKey(0)               
+cv2.destroyAllWindows()     
